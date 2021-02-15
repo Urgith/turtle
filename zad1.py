@@ -1,78 +1,79 @@
-from time import perf_counter  # time measurement module
-from scipy import linalg  # module which solve linear equation system
-import numpy as np  # module to work with matrixes
-import pylab  # module which draw charts
+from time import perf_counter # time measurement module
+from scipy import linalg      # module which solve linear equation system
+import numpy as np            # module to work with matrixes
+import pylab                  # module which draw charts
 
 
 def calculating(size_of_matrix):
-    ''' function which calculate time to solve a linear equation system
-        in form A*X=B
-        Arguments:
-          size_of_matrix - vertical and horizontal size of matrix
-                           it should be positive integer
-        return:
-          average time of calculating solution
-    '''
-    start = perf_counter()
-    times = []
+  ''' function which calculate time to solve a linear equation system in form A*X=B
+    Arguments:
+      size_of_matrix - vertical and horizontal size of matrix it should be positive integer
+    return:
+      average time of calculating solution
+  '''
+  start = perf_counter()
+  times = []
 
-    # A - coefficients of the equation system
-    # B - constant terms
-    while perf_counter() - start < 2:
+  # A - coefficients of the equation system
+  # B - constant terms
+  iterations = 0
+  while perf_counter() - start < 0.05 or iterations <= 2:
+    iterations += 1
 
-        A = np.random.rand(size_of_matrix, size_of_matrix)
-        B = np.random.rand(size_of_matrix, 1)
+    A = np.random.rand(size_of_matrix, size_of_matrix)
+    B = np.random.rand(size_of_matrix, 1)
 
-        if np.linalg.det(A) == 0:
-            continue
+    if np.linalg.det(A) == 0:
+      continue
 
-        start_of_calculating = perf_counter()
-        X = linalg.solve(A, B)
-        times.append(perf_counter() - start_of_calculating)
+    start_of_calculating = perf_counter()
+    X = linalg.solve(A, B)
+    times.append(perf_counter() - start_of_calculating)
 
-    return min(times)
+  if len(times) > 0:
+    times.remove(max(times))
+
+  return sum(times)/len(times)
 
 
 def creating_chart(size, order=3):
-    ''' function which create chart of execution time of finding solutions
-        in linear equation system
-        Arguments:
-          size - maximum size of tested system (number of unknown)
-                 it should pe integer >=11
-          order - order of approximated polynomial, nominal=3
-        return: polynomial as string
-    '''
-    if type(size) != int:
-        raise TypeError('size must be integer')
-    elif size <= 1:
-        raise ValueError('size must be greater than 11')
+  ''' function which create chart of execution time of finding solutions in linear equation system
+    Arguments:
+      size - maximum size of tested system (number of unknown) it should pe integer >=11
+      order - order of approximated polynomial, nominal=3
+    return: polynomial as string
+  '''
+  if type(size) != int:
+    raise TypeError('size must be integer')
+  elif size <= 1:
+    raise ValueError('size must be greater than 11')
 
-    if type(order) != int:
-        raise TypeError('order must be integer')
-    elif order < 0:
-        raise ValueError('order can not be negative')
+  if type(order) != int:
+    raise TypeError('order must be integer')
+  elif order < 0:
+    raise ValueError('order can not be negative')
 
-    sizes = np.arange(1, size, 10)
-    execut_t = np.asarray([calculating(siz) for siz in np.nditer(sizes)])
-    pylab.plot(sizes, execut_t, 'o', markersize=1, label='execution time')
+  sizes = np.arange(1, size)
+  execut_t = np.asarray([calculating(siz) for siz in np.nditer(sizes)])
+  pylab.plot(sizes, execut_t, 'o', markersize=1, label='execution time')
 
-    coefs = np.polyfit(sizes, execut_t, 3)
-    polynomial = np.poly1d(coefs)
+  coefs = np.polyfit(sizes, execut_t, 3)
+  polynomial = np.poly1d(coefs)
 
-    sizes = np.arange(1, size)
-    y_approx = np.asarray([polynomial(siz) for siz in np.nditer(sizes)])
+  sizes = np.arange(1, size)
+  y_approx = np.asarray([polynomial(siz) for siz in np.nditer(sizes)])
 
-    pylab.plot(sizes, y_approx, label='approximated function')
+  pylab.plot(sizes, y_approx, label='approximated function')
+  pylab.title('solving linear equation system')
+  pylab.ylabel('time of execution [s]')
+  pylab.xlabel('size of matrix [n]')
+  pylab.legend()
+  pylab.grid()
 
-    pylab.legend()
-    pylab.grid(True)
-    pylab.title('solving linear equation system')
-    pylab.xlabel('size of matrix [n]')
-    pylab.ylabel('time of execution [s]')
-    pylab.show()
+  pylab.show()
+  return polynomial
 
-    return polynomial
 
 if __name__ == '__main__':
-    function = creating_chart(502)
-    print(function)
+  function = creating_chart(501)
+  print(function)
