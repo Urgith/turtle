@@ -42,6 +42,7 @@ def draw_koch_curve(iterations, size=None, angle=60):
         Arguments:
           iterations - number of iterations of koch curve
           size - length of single line
+          angle - angle of curve, nominal=60
         return: None
     '''
     if type(iterations) != int:
@@ -58,5 +59,6 @@ def draw_koch_curve(iterations, size=None, angle=60):
 
     setup()
     koch_curve(iterations, size, angle)
+    turtle.mainloop()
 
 draw_koch_curve(4)
