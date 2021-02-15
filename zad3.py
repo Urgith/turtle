@@ -15,7 +15,7 @@ def setup():
     turtle.down()
 
 
-def hilbert(iterations, size, version='A'):
+def hilbert(iterations, size, version='left'):
     ''' function which draw hilbert curve
         Arguments:
           iterations - number of iterations of hilbert curve
@@ -36,30 +36,30 @@ def hilbert(iterations, size, version='A'):
     if iterations == 0:
         return
 
-    if version == 'A':
+    if version == 'left':
         turtle.left(90)
-        hilbert(iterations - 1, size, 'B')
+        hilbert(iterations - 1, size, 'right')
         turtle.forward(size)
         turtle.right(90)
-        hilbert(iterations - 1, size, 'A')
+        hilbert(iterations - 1, size, 'left')
         turtle.forward(size)
-        hilbert(iterations - 1, size, 'A')
+        hilbert(iterations - 1, size, 'left')
         turtle.right(90)
         turtle.forward(size)
-        hilbert(iterations - 1, size, 'B')
+        hilbert(iterations - 1, size, 'right')
         turtle.left(90)
 
-    elif version == 'B':
+    elif version == 'right':
         turtle.right(90)
-        hilbert(iterations - 1, size, 'A')
+        hilbert(iterations - 1, size, 'left')
         turtle.forward(size)
         turtle.left(90)
-        hilbert(iterations - 1, size, 'B')
+        hilbert(iterations - 1, size, 'right')
         turtle.forward(size)
-        hilbert(iterations - 1, size, 'B')
+        hilbert(iterations - 1, size, 'right')
         turtle.left(90)
         turtle.forward(size)
-        hilbert(iterations - 1, size, 'A')
+        hilbert(iterations - 1, size, 'left')
         turtle.right(90)
 
 
@@ -84,5 +84,6 @@ def draw_hilbert(iterations, size=None):
 
     setup()
     hilbert(iterations, size)
+    turtle.mainloop()
 
 draw_hilbert(4)
