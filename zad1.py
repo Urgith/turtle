@@ -5,9 +5,9 @@ import pylab
 
 
 def calculating(size_of_matrix):
-    ''' Function which calculate time to solve a linear equation system in form A*X=B
+    ''' Calculate time to solve a linear equation system in form A*X=B
     Arguments:
-      size_of_matrix - vertical and horizontal size of matrix it should be positive integer
+      size_of_matrix - vertical and horizontal size of matrix (int>0)
     return:
       average time of calculating solution
     '''
@@ -37,9 +37,9 @@ def calculating(size_of_matrix):
 
 
 def creating_chart(size, order=3):
-    ''' Function which create chart of execution time of finding solutions in linear equation system
+    ''' Create chart of execution time for linear equation solver
     Arguments:
-      size - maximum size of tested system (number of unknown) it should pe integer >=11
+      size - maximum size of tested system (number of unknowns, int>=11)
       order - order of approximated polynomial, nominal=3
     return: polynomial as string
     '''

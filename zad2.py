@@ -10,7 +10,7 @@ class Stack:
       size - method which calculate size of stack
     '''
     def __init__(self):
-        ''' constructor of the class, initialize empty stack as python list'''
+        ''' the class constructor, initialize empty stack as list'''
         self.items = []
 
     def __str__(self):

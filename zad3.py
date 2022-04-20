@@ -2,14 +2,20 @@ import turtle
 
 
 def setup():
-    ''' function which prepare our turtle to work, it set him to left down corner and speed him up
+    ''' function which prepare our turtle to work,
+        it set him to left down corner and speeds him up
     Arguments: none of them
     return: None
     '''
     turtle.hideturtle()
     turtle.speed(0)
     turtle.up()
-    turtle.setposition(-(turtle.window_width() / 2) + 20, -(turtle.window_height() / 2) + 20)
+
+    turtle.setposition(
+        -(turtle.window_width() / 2) + 20,
+        -(turtle.window_height() / 2) + 20
+    )
+
     turtle.down()
 
 

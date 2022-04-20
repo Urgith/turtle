@@ -2,7 +2,8 @@ import turtle
 
 
 def setup():
-    ''' function which prepare our turtle to work, it set him to left down corner and speed him up
+    ''' function which prepare our turtle to work,
+        it set him to left down corner and speeds him up
     Arguments: none of them
     return: None
     '''
