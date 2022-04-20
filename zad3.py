@@ -28,14 +28,16 @@ def hilbert(iterations, length, version='left'):
     return: None
     '''
     if length is None:
+        min_result = min(turtle.window_width(), turtle.window_height()) - 40
+
         if iterations >= 3:
-            length = min(turtle.window_width() - 40, turtle.window_height() - 40) / (2**iterations)
+            length = min_result / (2**iterations)
 
         elif iterations == 2:
-            length = min(turtle.window_width() - 40, turtle.window_height() - 40) / 3
+            length = min_result / 3
 
         elif iterations == 1:
-            length = min(turtle.window_width() - 40, turtle.window_height() - 40)
+            length = min_result
 
     if iterations == 0:
         return

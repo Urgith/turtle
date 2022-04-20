@@ -117,4 +117,4 @@ def show_poles(poles):
 
 
 if __name__ == '__main__':
-  hanoi_tower(4)
+    hanoi_tower(4)
